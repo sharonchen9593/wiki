@@ -1,6 +1,7 @@
 import DateField from "../DateField";
 import SelectField from "../SelectField";
 import React from "react";
+import "./filterSection.scss";
 
 function FilterSection({
   date,
@@ -9,7 +10,7 @@ function FilterSection({
   onDateChange,
 }) {
   return (
-    <div>
+    <div className="filter-section">
       <DateField
         year={date[0]}
         month={date[1]}

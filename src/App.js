@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import FilterSection from "./components/FilterSection";
 import ArticleList from "./components/ArticleList";
 import { MOCK } from "./mocks/mocks";
+import "./app.scss";
 
 const getYesterdayDate = () => {
   const todayDate = new Date();

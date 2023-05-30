@@ -5,13 +5,12 @@ function DateField({ year, month, day, onChange }) {
     return `${year}-${month}-${day}`;
   }, [year, month, day]);
 
-  // useCallback
   const handleChange = useCallback((event) => {
     onChange(event.target.valueAsDate);
   }, []);
 
   return (
-    <div>
+    <div className="filter-item">
       <label htmlFor="article">Start date:</label>
       <input
         type="date"

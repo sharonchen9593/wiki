@@ -1,4 +1,5 @@
 import ArticleListItem from "../ArticleListItem";
+import "./articleList.scss";
 
 function ArticleList({ articles }) {
   const articleItems = articles.map((article) => (
@@ -8,7 +9,7 @@ function ArticleList({ articles }) {
       key={article.article}
     />
   ));
-  return <div>{articleItems}</div>;
+  return <div className="article-list">{articleItems}</div>;
 }
 
 export default ArticleList;

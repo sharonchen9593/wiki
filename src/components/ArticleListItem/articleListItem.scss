@@ -1,0 +1,15 @@
+.article-list-item {
+  box-shadow: 1px 1px 4px lightgrey;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+  align-items: center;
+
+  .title {
+    margin-right: 20px;
+    word-wrap: break-word;
+    overflow: auto;
+    font-weight: bold;
+  }
+}

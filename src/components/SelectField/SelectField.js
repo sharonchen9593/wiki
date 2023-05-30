@@ -6,7 +6,7 @@ function SelectField({ selected, onChange }) {
   }, []);
 
   return (
-    <div>
+    <div className="filter-item">
       <label htmlFor="result-count">Number of results</label>
       <select
         name="result-count"

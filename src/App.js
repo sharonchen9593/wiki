@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FilterSection from "./components/FilterSection";
 import ArticleList from "./components/ArticleList";
 import { MOCK } from "./mocks/mocks";
@@ -36,13 +36,15 @@ function App() {
     setArticles(MOCK.items[0].articles);
   }, []);
 
-  const handleDateChange = (value) => {
+  const handleDateChange = useCallback((value) => {
     const newDate = getDateArr(value);
     setDate(newDate);
-  };
-  const handleResultCountChange = (value) => {
+  }, []);
+
+  const handleResultCountChange = useCallback((value) => {
     setResultCount(value);
-  };
+  }, []);
+
   return (
     <div className="app">
       <FilterSection

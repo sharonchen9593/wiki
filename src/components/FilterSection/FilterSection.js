@@ -1,5 +1,6 @@
 import DateField from "../DateField";
 import SelectField from "../SelectField";
+import React from "react";
 
 function FilterSection({
   date,
@@ -20,4 +21,4 @@ function FilterSection({
   );
 }
 
-export default FilterSection;
+export default React.memo(FilterSection);

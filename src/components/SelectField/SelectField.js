@@ -1,7 +1,9 @@
+import { memo, useCallback } from "react";
+
 function SelectField({ selected, onChange }) {
-  const handleChange = (event) => {
+  const handleChange = useCallback((event) => {
     onChange(event.target.value);
-  };
+  }, []);
 
   return (
     <div>
@@ -22,4 +24,4 @@ function SelectField({ selected, onChange }) {
   );
 }
 
-export default SelectField;
+export default memo(SelectField);

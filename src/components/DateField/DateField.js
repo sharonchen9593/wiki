@@ -1,9 +1,15 @@
-function DateField({ year, month, day, onChange }) {
-  const value = `${year}-${month}-${day}`;
+import { memo, useMemo, useCallback } from "react";
 
-  const handleChange = (event) => {
+function DateField({ year, month, day, onChange }) {
+  const value = useMemo(() => {
+    return `${year}-${month}-${day}`;
+  }, [year, month, day]);
+
+  // useCallback
+  const handleChange = useCallback((event) => {
     onChange(event.target.valueAsDate);
-  };
+  }, []);
+
   return (
     <div>
       <label htmlFor="article">Start date:</label>
@@ -18,4 +24,4 @@ function DateField({ year, month, day, onChange }) {
   );
 }
 
-export default DateField;
+export default memo(DateField);

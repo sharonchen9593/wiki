@@ -5,6 +5,12 @@ import { MOCK } from "./mocks/mocks";
 import "./app.scss";
 import { fetchArticles } from "./api/api";
 
+export const FETCH_STATE = {
+  LOADING: "loading",
+  ERROR: "error",
+  SUCCESS: "success",
+};
+
 const getYesterdayDate = () => {
   const todayDate = new Date();
   const yesterday = new Date();
@@ -33,14 +39,22 @@ function App() {
   const [date, setDate] = useState(getYesterdayDate());
   const [resultCount, setResultCount] = useState(100);
   const [articles, setArticles] = useState([]);
+  const [fetchState, setFetchState] = useState(FETCH_STATE.LOADING);
 
   useEffect(() => {
     updateArticles(date);
   }, [date]);
 
-  const updateArticles = useCallback(async (date) => {
-    const newArticles = await fetchArticles(date);
-    setArticles(newArticles);
+  const updateArticles = useCallback((date) => {
+    setFetchState(FETCH_STATE.LOADING);
+    fetchArticles(date)
+      .then((newArticles) => {
+        setFetchState(FETCH_STATE.SUCCESS);
+        setArticles(newArticles);
+      })
+      .catch(() => {
+        setFetchState(FETCH_STATE.ERROR);
+      });
   }, []);
 
   const handleDateChange = useCallback((value) => {
@@ -60,7 +74,11 @@ function App() {
         onDateChange={handleDateChange}
         onResultCountChange={handleResultCountChange}
       />
-      <ArticleList articles={articles} resultCount={resultCount} />
+      <ArticleList
+        articles={articles}
+        resultCount={resultCount}
+        fetchState={fetchState}
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import FilterSection from "./components/FilterSection";
 import ArticleList from "./components/ArticleList";
+import PinnedArticles from "./components/PinnedArticles";
 import { MOCK } from "./mocks/mocks";
 import "./app.scss";
 import { fetchArticles } from "./api/api";
@@ -40,6 +41,8 @@ function App() {
   const [resultCount, setResultCount] = useState(100);
   const [articles, setArticles] = useState([]);
   const [fetchState, setFetchState] = useState(FETCH_STATE.LOADING);
+  // pinnedArticles format should be {[title]: articleInfo, ...}
+  const [pinnedArticles, setPinnedArticles] = useState({});
 
   useEffect(() => {
     updateArticles(date);
@@ -66,8 +69,20 @@ function App() {
     setResultCount(value);
   }, []);
 
+  const handlePinClick = (article) => {
+    const newPinnedArticles = { ...pinnedArticles };
+    if (newPinnedArticles[article.article]) {
+      delete newPinnedArticles[article.article];
+    } else {
+      newPinnedArticles[article.article] = { ...article };
+    }
+
+    setPinnedArticles(newPinnedArticles);
+  };
+
   return (
     <div className="app">
+      <PinnedArticles articles={pinnedArticles} onPin={handlePinClick} />
       <FilterSection
         resultCount={resultCount}
         date={date}
@@ -78,6 +93,8 @@ function App() {
         articles={articles}
         resultCount={resultCount}
         fetchState={fetchState}
+        pinnedArticles={pinnedArticles}
+        onPin={handlePinClick}
       />
     </div>
   );

@@ -1,8 +1,11 @@
+import { memo, useMemo } from "react";
 import ArticleListItem from "../ArticleListItem";
 import "./articleList.scss";
 
-function ArticleList({ articles }) {
-  const articleItems = articles.map((article) => (
+function ArticleList({ articles, resultCount }) {
+  const filteredArticles = articles.slice(0, resultCount);
+
+  const articleItems = filteredArticles.map((article) => (
     <ArticleListItem
       title={article.article}
       views={article.views}
@@ -12,4 +15,4 @@ function ArticleList({ articles }) {
   return <div className="article-list">{articleItems}</div>;
 }
 
-export default ArticleList;
+export default memo(ArticleList);

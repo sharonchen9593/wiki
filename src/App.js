@@ -3,6 +3,7 @@ import FilterSection from "./components/FilterSection";
 import ArticleList from "./components/ArticleList";
 import { MOCK } from "./mocks/mocks";
 import "./app.scss";
+import { fetchArticles } from "./api/api";
 
 const getYesterdayDate = () => {
   const todayDate = new Date();
@@ -34,7 +35,12 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    setArticles(MOCK.items[0].articles);
+    updateArticles(date);
+  }, [date]);
+
+  const updateArticles = useCallback(async (date) => {
+    const newArticles = await fetchArticles(date);
+    setArticles(newArticles);
   }, []);
 
   const handleDateChange = useCallback((value) => {
@@ -54,7 +60,7 @@ function App() {
         onDateChange={handleDateChange}
         onResultCountChange={handleResultCountChange}
       />
-      <ArticleList articles={articles} />
+      <ArticleList articles={articles} resultCount={resultCount} />
     </div>
   );
 }

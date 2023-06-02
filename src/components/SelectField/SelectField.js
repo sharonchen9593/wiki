@@ -13,6 +13,7 @@ function SelectField({ selected, onChange }) {
         id="result-count"
         value={selected}
         onChange={handleChange}
+        data-testid="select-field"
       >
         <option value="25">25</option>
         <option value="50">50</option>

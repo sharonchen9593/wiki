@@ -7,7 +7,7 @@ function ArticleListItem({ article, onPin, isPinned }) {
   };
 
   return (
-    <div className="article-list-item">
+    <div className="article-list-item" data-testid="article-list-item">
       <div className="title">{article.article}</div>
       <div className="views">
         <label>Views:</label>
@@ -17,6 +17,7 @@ function ArticleListItem({ article, onPin, isPinned }) {
         color={isPinned ? "primary" : "disabled"}
         tabIndex="0"
         onClick={handlePinClick}
+        data-testid="pin-icon"
       />
     </div>
   );

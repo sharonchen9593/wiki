@@ -48,16 +48,15 @@ function App() {
     updateArticles(date);
   }, [date]);
 
-  const updateArticles = useCallback((date) => {
+  const updateArticles = useCallback(async (date) => {
     setFetchState(FETCH_STATE.LOADING);
-    fetchArticles(date)
-      .then((newArticles) => {
-        setFetchState(FETCH_STATE.SUCCESS);
-        setArticles(newArticles);
-      })
-      .catch(() => {
-        setFetchState(FETCH_STATE.ERROR);
-      });
+    try {
+      const newArticles = await fetchArticles(date);
+      setFetchState(FETCH_STATE.SUCCESS);
+      setArticles(newArticles);
+    } catch (e) {
+      setFetchState(FETCH_STATE.ERROR);
+    }
   }, []);
 
   const handleDateChange = useCallback((value) => {

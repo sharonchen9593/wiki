@@ -6,7 +6,10 @@ function DateField({ year, month, day, onChange }) {
   }, [year, month, day]);
 
   const handleChange = useCallback((event) => {
-    onChange(event.target.valueAsDate);
+    console.log(event.target.value);
+    if (event.target.value) {
+      onChange(event.target.valueAsDate);
+    }
   }, []);
 
   return (
@@ -16,8 +19,8 @@ function DateField({ year, month, day, onChange }) {
         type="date"
         id="article"
         name="article-date"
-        value={value}
         onChange={handleChange}
+        data-testid="date-field"
       />
     </div>
   );

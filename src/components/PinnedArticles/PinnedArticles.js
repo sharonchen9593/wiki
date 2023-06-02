@@ -6,12 +6,12 @@ function PinnedArticles({ articles, onPin }) {
       article={articles[article]}
       isPinned
       onPin={onPin}
-      key={article.article}
+      key={article}
     />
   ));
 
   return (
-    <div className="article-list">
+    <div className="article-list pinned-articles-list">
       Pinned Articles
       <div>{pinnedArticles.length ? pinnedArticles : "No pinned articles"}</div>
     </div>
